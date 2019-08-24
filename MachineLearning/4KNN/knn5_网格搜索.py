@@ -28,7 +28,12 @@ param_grid=[
 ]
 
 knn_clf=KNeighborsClassifier()
-grid_search=GridSearchCV(knn_clf,param_grid,n_jobs=-1)    #参数：n_jobs=-1 用多少个核进行计算(-1用全部核); verbose=2 运行时输出过程
+'''
+参数: n_jobs=-1 用多少个核进行计算(-1用全部核)
+      verbose=2 运行时输出过程(值越大输出内容越详细)
+      cv=3  网格搜索将训练数据集分成几份，默认3份
+'''
+grid_search=GridSearchCV(knn_clf,param_grid,verbose=1,n_jobs=-1,cv=3)
 grid_search.fit(X_train,y_train)                #耗时操作
 
 print(grid_search.best_estimator_)              #详细结果

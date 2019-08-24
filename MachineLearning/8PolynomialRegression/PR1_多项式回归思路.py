@@ -14,6 +14,7 @@ print("=============使用线性回归(效果不好)====================")
 lin_reg=LinearRegression()
 lin_reg.fit(X,y)
 y_predict=lin_reg.predict(X)
+print("score: ",lin_reg.score(X,y))
 
 # plt.scatter(x,y)
 # plt.plot(x,y_predict,color='r')
@@ -27,6 +28,7 @@ print("X加上一个特征X^2: ",X2.shape)  #新的数据集每个样本有两�
 lin_reg2=LinearRegression()
 lin_reg2.fit(X2,y)
 y_predict2=lin_reg2.predict(X2)
+print("score: ",lin_reg2.score(X2,y))
 
 plt.scatter(x,y)
 plt.plot(np.sort(x),y_predict2[np.argsort(x)],color='r')

@@ -18,7 +18,7 @@ print("==============使用批量梯度下降法训练====================")
 def J(theta,X_b,y):         #损失函数的值
     return np.sum((y-X_b.dot(theta))**2) / len(X_b)
 
-def dJ(theta,X_b,y):        #求导
+def dJ(theta,X_b,y):        #求导(梯度函数)
     return X_b.T.dot(X_b.dot(theta)-y) / len(X_b)
 
 
