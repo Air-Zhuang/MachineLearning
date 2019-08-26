@@ -42,7 +42,7 @@ print("============逻辑回归解决多分类任务===================")
 log_reg=LogisticRegression()
 log_reg.fit(X_train,y_train)
 print("默认使用ovr: ",log_reg.multi_class)
-print(log_reg.score(X_test,y_test))
+print("分类准确度: ",log_reg.score(X_test,y_test))
 
 plot_decision_boundary(log_reg, axis=[4, 8.5, 1.5, 4.5])
 plt.scatter(X[y==0,0], X[y==0,1])
@@ -54,7 +54,7 @@ plt.show()
 log_reg2=LogisticRegression(multi_class='multinomial',solver='newton-cg')   #使用ovo需要这样设置
 log_reg2.fit(X_train,y_train)
 print("使用ovo: ",log_reg2.multi_class)
-print(log_reg2.score(X_test,y_test))
+print("分类准确度: ",log_reg2.score(X_test,y_test))
 
 plot_decision_boundary(log_reg2, axis=[4, 8.5, 1.5, 4.5])
 plt.scatter(X[y==0,0], X[y==0,1])
@@ -71,12 +71,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,random_state=666)
 '''使用ovr'''
 log_reg=LogisticRegression()
 log_reg.fit(X_train,y_train)
-print(log_reg.score(X_test,y_test))
+print("分类准确度: ",log_reg.score(X_test,y_test))
 
 '''使用ovo'''
 log_reg2=LogisticRegression(multi_class='multinomial',solver='newton-cg')   #使用ovo需要这样设置
 log_reg2.fit(X_train,y_train)
-print(log_reg2.score(X_test,y_test))
+print("分类准确度: ",log_reg2.score(X_test,y_test))
 
 print("============分类手写digits数据集===================")
 digits=datasets.load_digits()
@@ -87,12 +87,12 @@ X_train, X_test, y_train, y_test = train_test_split(X, y,random_state=666)
 '''使用ovr'''
 log_reg=LogisticRegression()
 log_reg.fit(X_train,y_train)
-print(log_reg.score(X_test,y_test))
+print("分类准确度: ",log_reg.score(X_test,y_test))
 
 '''使用ovo'''
 log_reg2=LogisticRegression(multi_class='multinomial',solver='newton-cg')   #使用ovo需要这样设置
 log_reg2.fit(X_train,y_train)
-print(log_reg2.score(X_test,y_test))
+print("分类准确度: ",log_reg2.score(X_test,y_test))
 
 print("================使用sklearn独立封装的OvO和OvR可以将其他的二分类任务改成多分类任务==============")
 from sklearn.multiclass import OneVsRestClassifier
@@ -100,8 +100,8 @@ from sklearn.multiclass import OneVsOneClassifier
 
 ovr=OneVsRestClassifier(log_reg)
 ovr.fit(X_train,y_train)
-print(ovr.score(X_test,y_test))
+print("分类准确度: ",ovr.score(X_test,y_test))
 
 ovo=OneVsOneClassifier(log_reg)
 ovo.fit(X_train,y_train)
-print(ovo.score(X_test,y_test))
+print("分类准确度: ",ovo.score(X_test,y_test))
