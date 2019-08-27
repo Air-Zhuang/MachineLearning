@@ -39,7 +39,7 @@ rf_clf2=RandomForestClassifier(n_estimators=500,
                               random_state=666,
                               oob_score=True,
                               n_jobs=-1)
-
+print(rf_clf2)
 rf_clf2.fit(X,y)
 print("随机森林oob分类准确度: ",rf_clf2.oob_score_)
 

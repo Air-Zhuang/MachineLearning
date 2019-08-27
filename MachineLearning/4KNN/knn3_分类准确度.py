@@ -16,7 +16,7 @@ y=digits.target                         #1791 * 1  特征集
 
 some_digit_image=X[666].reshape(8,8)                    #将一个手写数据绘图
 plt.imshow(some_digit_image,cmap=matplotlib.cm.binary)  #cmap只是将像素由彩色变成黑白
-# plt.show()
+plt.show()
 
 X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.2)   #分割训练和测试数据集
 

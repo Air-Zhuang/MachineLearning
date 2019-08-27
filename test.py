@@ -2,12 +2,15 @@ import pymysql
 import numpy as np
 from sklearn import datasets
 from sklearn.linear_model import LinearRegression
-from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import GridSearchCV
 import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.preprocessing import StandardScaler
+from sklearn.pipeline import Pipeline
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 
 def calculate_fans_num(s):
     if s:
@@ -71,27 +74,31 @@ for i in data_set:
 
 print(data_set2)
 
-data_set2=[i for i in data_set2 if i[2]<400]        #price
+data_set2=[i for i in data_set2 if i[2]<100]        #price
 data_set2=[i for i in data_set2 if i[1]<10]         #engagement
-data_set2=[i for i in data_set2 if i[0]<200000]     #fans
+data_set2=[i for i in data_set2 if i[0]<50000]     #fans
 
-raw_data_x=[[i[0],i[1],i[3]] for i in data_set2]
+raw_data_x=[[i[0],i[1]] for i in data_set2]
 raw_data_y=[i[2] for i in data_set2]
 
-plt.scatter([i[1] for i in data_set2],[i[0] for i in data_set2])
+plt.scatter([i[1] for i in data_set2],[i[2] for i in data_set2])
 plt.show()
 
 X=np.array(raw_data_x)      #(7181, 2)
 Y=np.array(raw_data_y)      #(7181,)
 
 X_train, X_test, y_train, y_test=train_test_split(X,Y,test_size=0.2,random_state=666)
+#
+poly_reg = Pipeline([
+    ("poly", PolynomialFeatures(degree=2)),     #多项式的增加特征
+    ("std_scaler", StandardScaler()),           #归一化
+    ("lin_reg", LinearRegression())             #线性回归
+])
 
-reg=LinearRegression()
-reg.fit(X_train,y_train)
-print("系数:",reg.coef_)
-print("截距:",reg.intercept_)
-print("score:",reg.score(X_test,y_test))
-
+poly_reg.fit(X_train,y_train)
+y_predict=poly_reg.predict(X_test)
+print("score: ",poly_reg.score(X_test,y_test))
+print("MSE: ",mean_squared_error(y_test,y_predict))
 
 
 # print("=============KNN的Regressor======================")
